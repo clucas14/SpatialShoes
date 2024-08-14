@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct SpatialShoesApp: App {
+    @State private var vm = ShoeVM()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(vm)
         }
     }
 }

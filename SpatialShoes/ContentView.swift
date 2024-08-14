@@ -7,20 +7,57 @@
 
 import SwiftUI
 import RealityKit
-import RealityKitContent
+import SpatialShoes3D
 
 struct ContentView: View {
+    @Environment(ShoeVM.self) private var vm
+    private let gridItem: [GridItem] = [GridItem(.adaptive(minimum: 250))]
+    
     var body: some View {
-        VStack {
-            Model3D(named: "Scene", bundle: realityKitContentBundle)
-                .padding(.bottom, 50)
-
-            Text("Hello, world!")
+        @Bindable var shoeBindable = vm
+        VStack{
+            ScrollView {
+                VStack(alignment: .leading) {
+                    Text("Shoes")
+                        .font(.title)
+                        .padding(.leading, 32)
+                    LazyVGrid(columns: gridItem) {
+                        ForEach(vm.shoes) { shoe in
+                            NavigationLink(value: shoe) {
+                                VStack {
+                                    Model3D(named: shoe.model3DName,
+                                            bundle: spatialShoes3DBundle) { model in
+                                        model
+                                            .resizable()
+                                            .scaledToFit()
+                                        //                                                        .scaleEffect(scaleMagnified)
+//                                            .offset(y: -50)
+                                        //                                                        .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: -1, z: 0))
+                                        //                                                        .rotation3DEffect(.degrees(Double(currentRotation)), axis: (x: 0, y: 1, z: 0))
+                                    } placeholder: {
+                                        ProgressView()
+                                    }
+                                    Text(shoe.name)
+                                        .font(.title)
+                                    Text(shoe.brand)
+                                        .font(.headline)
+                                }
+                                .padding()
+                            }
+                            .buttonBorderShape(.roundedRectangle(radius: 25))
+//                            .buttonStyle(GridButton())
+                        }
+                    }
+                }
+            }
         }
-        .padding()
+        .alert("App Error", isPresented: $shoeBindable.showAlert) { } message: {
+            Text(vm.errorMsg)
+        }
     }
 }
 
 #Preview(windowStyle: .automatic) {
     ContentView()
+        .environment(ShoeVM(interactor: DataTest()))
 }
