@@ -9,7 +9,7 @@ import SwiftUI
 import RealityKit
 import SpatialShoes3D
 
-struct GridView: View {
+struct FavoritesView: View {
     @Environment(ShoesVM.self) private var shoesVM
     private let gridItem: [GridItem] = [GridItem(.adaptive(minimum: 260))]
     
@@ -53,6 +53,6 @@ struct GridView: View {
 }
 
 #Preview {
-    GridView()
+    FavoritesView()
         .environment(ShoesVM(interactor: DataTest()))
 }

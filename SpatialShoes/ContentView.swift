@@ -84,8 +84,8 @@ struct ContentView: View {
                         .resizable()
                         .scaledToFit()
                         .scaleEffect(scaleMagnified)
-//                        .aspectRatio(contentMode: .fit)
-//                        .scaleEffect(x: 0.5, y: 0.5, z: 0.5) // Escala el modelo
+                    //                        .aspectRatio(contentMode: .fit)
+                    //                        .scaleEffect(x: 0.5, y: 0.5, z: 0.5) // Escala el modelo
                         .frame(width: 450, height: 450)
                         .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: -1, z: 0))
                         .rotation3DEffect(.degrees(Double(currentRotation)), axis: (x: 0, y: 1, z: 0))
@@ -122,20 +122,15 @@ struct ContentView: View {
                             initialScale = scaleMagnified
                         }
                 )
-                //                RealityView { content in
-                //                    do {
-                //                        let scene = try await Entity(named: "Shoes", in: spatialShoes3DBundle)
-                //                        if let shoe = scene.findEntity(named: selectedShoe.model3DName) {
-                //
-                //                           // shoe.scale = [0.5, 0.5, 0.5]
-                //                            content.add(shoe)
-                //
-                //                        }
-                //                    } catch {
-                //                        print("Error al cargar entidad")
-                //                    }
-                //                }
-                //                .frame(width: 150, height: 150)
+                .gesture(
+                    TapGesture()
+                        .onEnded { _ in
+                            if !shoesVM.enlargedView {
+                                shoesVM.enlargedView = true
+                                open(id: "shoeEnlarged")
+                            }
+                        }
+                )
             }
         }
         .onAppear {
@@ -174,23 +169,3 @@ struct ContentView: View {
     ContentView()
         .environment(ShoesVM(interactor: DataTest()))
 }
-
-
-
-
-//:MARK
-/*RealityView { content in
- do {
- let scene = try await Entity(named: "Shoes", in: spatialShoes3DBundle)
- if let shoe = scene.findEntity(named: shoe.model3DName) {
- 
- //                                                shoe.scale = SIMD3<Float>(repeating: 0.5)
- content.add(shoe)
- 
- }
- } catch {
- print("Error al cargar entidad")
- }
- }
- .frame(width: 150, height: 150)
- */

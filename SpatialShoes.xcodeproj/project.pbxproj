@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4A6C22CE2C6FA7E9003637F2 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C22CD2C6FA7E9003637F2 /* GridView.swift */; };
+		4A6C22CE2C6FA7E9003637F2 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C22CD2C6FA7E9003637F2 /* FavoritesView.swift */; };
 		4A6C22D02C6FB3B4003637F2 /* ShoeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C22CF2C6FB3B4003637F2 /* ShoeModel.swift */; };
 		4A741FD72C6CF46B00845CE6 /* shoesTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A741FD62C6CF46B00845CE6 /* shoesTest.json */; };
 		4A741FD92C6CF51100845CE6 /* DataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A741FD82C6CF51100845CE6 /* DataTest.swift */; };
@@ -30,7 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4A6C22CD2C6FA7E9003637F2 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		4A6C22CD2C6FA7E9003637F2 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		4A6C22CF2C6FB3B4003637F2 /* ShoeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeModel.swift; sourceTree = "<group>"; };
 		4A741FD62C6CF46B00845CE6 /* shoesTest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = shoesTest.json; sourceTree = "<group>"; };
 		4A741FD82C6CF51100845CE6 /* DataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTest.swift; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				4ADE9BEF2C6CEA6A0073D2F8 /* ContentView.swift */,
-				4A6C22CD2C6FA7E9003637F2 /* GridView.swift */,
+				4A6C22CD2C6FA7E9003637F2 /* FavoritesView.swift */,
 				4AF0F7922C709E1100040586 /* VolumetricShoe.swift */,
 			);
 			name = Views;
@@ -261,7 +261,7 @@
 				4A741FD92C6CF51100845CE6 /* DataTest.swift in Sources */,
 				4AF0F7932C709E1100040586 /* VolumetricShoe.swift in Sources */,
 				4A9279AF2C6CEDAB00D4ECE3 /* ShoeModelDTO.swift in Sources */,
-				4A6C22CE2C6FA7E9003637F2 /* GridView.swift in Sources */,
+				4A6C22CE2C6FA7E9003637F2 /* FavoritesView.swift in Sources */,
 				4ADE9BEE2C6CEA6A0073D2F8 /* SpatialShoesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
