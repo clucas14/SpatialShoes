@@ -1,13 +1,13 @@
 //
 //  ShoeModel.swift
-//  Spatial Shoes
+//  SpatialShoes
 //
-//  Created by Carlos Lucas Sánchez on 14/8/24.
+//  Created by Carlos Lucas Sánchez on 16/8/24.
 //
 
 import Foundation
 
-struct ShoeModel: Codable, Identifiable, Hashable {
+struct ShoeModel: Identifiable, Hashable {
     let id: Int
     let name: String
     let brand: String
@@ -23,13 +23,5 @@ struct ShoeModel: Codable, Identifiable, Hashable {
     let colors: [String]
     let warranty: Int
     let certifications: [String]
-}
-
-enum ShoeType: String, Codable {
-    case botas = "Botas"
-    case casual = "Casual"
-    case deportivas = "Deportivas"
-    case especiales = "Especiales"
-    case formales = "Formales"
-    case tacones = "Tacones"
+    var isFavorited: Bool
 }

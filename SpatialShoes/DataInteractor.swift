@@ -16,7 +16,7 @@ extension DataInteractor {
     var url: URL { Bundle.main.url(forResource: "shoes", withExtension: "json")! }
     
     func getData() throws -> [ShoeModel] {
-        try loadJSON(url: url, type: [ShoeModel].self)
+        try loadJSON(url: url, type: [ShoeModelDTO].self).map(\.toPresentation)
     }
 }
 

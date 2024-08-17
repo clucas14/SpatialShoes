@@ -9,12 +9,19 @@ import SwiftUI
 
 @main
 struct SpatialShoesApp: App {
-    @State private var vm = ShoeVM()
+    @State private var shoesVM = ShoesVM()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(vm)
+                .environment(shoesVM)
         }
+        
+        WindowGroup(id: "shoeEnlarged") {
+            VolumetricShoe()
+                .environment(shoesVM)
+        }
+        .windowStyle(.volumetric)
+        .defaultSize(width: 0.7, height: 0.7, depth: 0.7, in: .meters)
     }
 }

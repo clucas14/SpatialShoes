@@ -8,10 +8,14 @@
 import Foundation
 
 @Observable
-final class ShoeVM {
+final class ShoesVM {
     let interactor: DataInteractor
     
     var shoes: [ShoeModel]
+    
+    var selectedShoe: ShoeModel?
+    
+    var enlargedView = false
     
     var showAlert = false
     @ObservationIgnored var errorMsg = ""
@@ -24,6 +28,20 @@ final class ShoeVM {
             self.shoes = []
             errorMsg = "\(error)"
             showAlert.toggle()
+        }
+    }
+    
+    func selectShoe() {
+        if selectedShoe == nil {
+            selectedShoe = shoes.first
+        }
+    }
+    
+    func toggleFavorited(shoe: ShoeModel) {
+        if let index = shoes.firstIndex(of: shoe) {
+//        if let index = shoes.firstIndex(where: { $0.id == shoe.id }) {
+            shoes[index].isFavorited.toggle()
+            selectedShoe = shoes[index]
         }
     }
 }
