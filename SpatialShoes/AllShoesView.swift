@@ -82,16 +82,17 @@ struct AllShoesView: View {
                 Model3D(named: "\(selectedShoe.model3DName)Scene", bundle: spatialShoes3DBundle) { model in
                     model
                         .resizable()
-                        .scaledToFit()
+//                        .scaledToFit()
                         .scaleEffect(scaleMagnified)
-                    //                        .aspectRatio(contentMode: .fit)
+                                            .aspectRatio(contentMode: .fit)
                     //                        .scaleEffect(x: 0.5, y: 0.5, z: 0.5) // Escala el modelo
-                        .frame(width: 450, height: 450)
+                        
                         .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: -1, z: 0))
                         .rotation3DEffect(.degrees(Double(currentRotation)), axis: (x: 0, y: 1, z: 0))
                 } placeholder: {
                     ProgressView()
                 }
+                .frame(width: 400, height: 450)
                 .gesture(
                     DragGestureHandler(free: free, currentRotation: $currentRotation, lastDragValue: $lastDragValue, velocity: $velocity)
                         .dragGesture()

@@ -35,6 +35,11 @@ final class ShoesVM {
         }
     }
     
+    func shoesBy(brand: Brand) -> [ShoeModel] {
+        shoes.filter { $0.brand == brand }
+    }
+    
+    // Revisar si finalmente se usa
     func selectShoe() {
         if selectedShoe == nil {
             selectedShoe = shoes.first

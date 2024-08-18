@@ -10,7 +10,7 @@ import Foundation
 struct ShoeModelDTO: Codable {
     let id: Int
     let name: String
-    let brand: String
+    let brand: Brand
     let size: [Int]
     let price: Float
     let description: String
@@ -32,6 +32,13 @@ enum ShoeType: String, Codable {
     case especiales = "Especiales"
     case formales = "Formales"
     case tacones = "Tacones"
+}
+
+enum Brand: String, Codable, CaseIterable {
+    case athletica = "Athletica"
+    case elegancewalk = "EleganceWalk"
+    case gentlemenstyle = "GentlemenStyle"
+    case urbanstride = "UrbanStride"
 }
 
 extension ShoeModelDTO {

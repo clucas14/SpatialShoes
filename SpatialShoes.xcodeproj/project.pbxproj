@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A24916B2C72624C00333026 /* AllShoesView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A24916A2C72624C00333026 /* AllShoesView2.swift */; };
 		4A613E9F2C71E441003E6F45 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A613E9E2C71E441003E6F45 /* MainTabView.swift */; };
 		4A613EA22C720165003E6F45 /* DragGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A613EA12C720165003E6F45 /* DragGestureHandler.swift */; };
 		4A613EA42C7201B1003E6F45 /* MagnifyGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A613EA32C7201B0003E6F45 /* MagnifyGestureHandler.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A24916A2C72624C00333026 /* AllShoesView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllShoesView2.swift; sourceTree = "<group>"; };
 		4A613E9E2C71E441003E6F45 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		4A613EA12C720165003E6F45 /* DragGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragGestureHandler.swift; sourceTree = "<group>"; };
 		4A613EA32C7201B0003E6F45 /* MagnifyGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagnifyGestureHandler.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			children = (
 				4A613E9E2C71E441003E6F45 /* MainTabView.swift */,
 				4ADE9BEF2C6CEA6A0073D2F8 /* AllShoesView.swift */,
+				4A24916A2C72624C00333026 /* AllShoesView2.swift */,
 				4A6C22CD2C6FA7E9003637F2 /* FavoritesView.swift */,
 				4AF0F7922C709E1100040586 /* VolumetricShoeView.swift */,
 			);
@@ -280,6 +283,7 @@
 				4AF0F7932C709E1100040586 /* VolumetricShoeView.swift in Sources */,
 				4A9279AF2C6CEDAB00D4ECE3 /* ShoeModelDTO.swift in Sources */,
 				4A6C22CE2C6FA7E9003637F2 /* FavoritesView.swift in Sources */,
+				4A24916B2C72624C00333026 /* AllShoesView2.swift in Sources */,
 				4A613E9F2C71E441003E6F45 /* MainTabView.swift in Sources */,
 				4A613EA42C7201B1003E6F45 /* MagnifyGestureHandler.swift in Sources */,
 				4ADE9BEE2C6CEA6A0073D2F8 /* SpatialShoesApp.swift in Sources */,

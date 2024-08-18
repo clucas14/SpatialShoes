@@ -37,7 +37,7 @@ struct FavoritesView: View {
                                 .frame(width: 150, height: 150)
                                 Text(shoe.name)
                                     .font(.title)
-                                Text(shoe.brand)
+                                Text(shoe.brand.rawValue)
                                     .font(.headline)
                             }
                             .frame(width: 230, height: 250)

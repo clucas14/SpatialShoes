@@ -10,7 +10,7 @@ import Foundation
 struct ShoeModel: Identifiable, Hashable {
     let id: Int
     let name: String
-    let brand: String
+    let brand: Brand
     let size: [Int]
     let price: Float
     let description: String
