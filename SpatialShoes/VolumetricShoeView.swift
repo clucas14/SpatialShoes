@@ -9,7 +9,7 @@ import SwiftUI
 import RealityKit
 import SpatialShoes3D
 
-struct VolumetricShoe: View {
+struct VolumetricShoeView: View {
     @Environment(ShoesVM.self) private var shoesVM
        
     var body: some View {
@@ -20,15 +20,21 @@ struct VolumetricShoe: View {
                 return
             }
             do {
-                let scene = try await Entity(named: "\(selectedShoe.model3DName)Scene", in: spatialShoes3DBundle)
+                let shoe = try await Entity(named: "\(selectedShoe.model3DName)Scene", in: spatialShoes3DBundle)
 //                if let shoe = scene.findEntity(named: selectedShoe.model3DName) {
                     
-                scene.scale = [0.5, 0.5, 0.5]
-                    content.add(scene)
+                shoe.scale = [0.5, 0.5, 0.5]
+                shoe.components.set(InputTargetComponent())
+                    content.add(shoe)
                     
 //                }
             } catch {
-                print("Error loading entity")
+                shoesVM.showAlert.toggle()
+                shoesVM.errorMsg = "Error loading entity"
+            }
+        } update: { content in
+            if let model = content.entities.first {
+//                model.transform.scale = scale
             }
         }
         .onDisappear {
@@ -39,7 +45,7 @@ struct VolumetricShoe: View {
 
 #Preview(windowStyle: .volumetric) {
     let shoesVM = ShoesVM(interactor: DataTest())
-    VolumetricShoe()
+    VolumetricShoeView()
         .environment(shoesVM)
         .onAppear {
             shoesVM.selectedShoe = shoesVM.shoes.first

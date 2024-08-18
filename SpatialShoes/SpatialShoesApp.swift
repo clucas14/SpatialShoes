@@ -13,12 +13,12 @@ struct SpatialShoesApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainTabView()
                 .environment(shoesVM)
         }
         
         WindowGroup(id: "shoeEnlarged") {
-            VolumetricShoe()
+            VolumetricShoeView()
                 .environment(shoesVM)
         }
         .windowStyle(.volumetric)

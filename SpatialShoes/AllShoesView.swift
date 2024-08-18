@@ -9,20 +9,20 @@ import SwiftUI
 import RealityKit
 import SpatialShoes3D
 
-struct ContentView: View {
+struct AllShoesView: View {
     @Environment(ShoesVM.self) private var shoesVM
     @Environment(\.openWindow) private var open
     
     @State private var rotationAngle: Double = 0.0
+    @State private var lastDragValue: CGFloat = 0.0
+    @State private var velocity: CGFloat = 0.0
     
     @State private var free = false
     @State private var exhibitor = true
     
     @State private var currentRotation: CGFloat = 0.0
-    @State private var lastDragValue: CGFloat = 0.0
-    @State private var velocity: CGFloat = 0.0
     
-    @State var initialScale: CGFloat = 0.6
+    @State private var initialScale: CGFloat = 0.6
     @State private var scaleMagnified: Double = 1.0
     
     var body: some View {
@@ -93,34 +93,12 @@ struct ContentView: View {
                     ProgressView()
                 }
                 .gesture(
-                    DragGesture()
-                        .onChanged { value in
-                            let delta = value.translation.width - lastDragValue
-                            velocity = delta / 10
-                            lastDragValue = value.translation.width
-                            if free {
-                                currentRotation += velocity
-                            }
-                        }
-                        .onEnded { _ in
-                            lastDragValue = 0.0
-                            if free {
-                                startInertial()
-                            }
-                        }
+                    DragGestureHandler(free: free, currentRotation: $currentRotation, lastDragValue: $lastDragValue, velocity: $velocity)
+                        .dragGesture()
                 )
                 .gesture(
-                    MagnifyGesture()
-                        .onChanged { value in
-                            // La escala es sobre 1.0
-                            let newScale = initialScale - (2.0 - value.magnification)
-                            if 0.4...2.0 ~= newScale {
-                                scaleMagnified = newScale
-                            }
-                        }
-                        .onEnded { value in
-                            initialScale = scaleMagnified
-                        }
+                    MagnifyGestureHandler(initialScale: $initialScale, scaleMagnified: $scaleMagnified)
+                        .magnifyGesture()
                 )
                 .gesture(
                     TapGesture()
@@ -152,20 +130,10 @@ struct ContentView: View {
         RunLoop.current.add(timer, forMode: .common)
     }
     
-    func startInertial() {
-        let inertialTimer =  Timer.scheduledTimer(withTimeInterval: 0.016, repeats: true) { timer in
-            if abs(velocity) < 0.01 {
-                timer.invalidate()
-            } else {
-                velocity *= 0.95
-                currentRotation += velocity
-            }
-        }
-        RunLoop.current.add(inertialTimer, forMode: .common)
-    }
+
 }
 
 #Preview(windowStyle: .automatic) {
-    ContentView()
+    AllShoesView()
         .environment(ShoesVM(interactor: DataTest()))
 }

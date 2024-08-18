@@ -14,10 +14,10 @@ struct FavoritesView: View {
     private let gridItem: [GridItem] = [GridItem(.adaptive(minimum: 260))]
     
     var body: some View {
-        ScrollView {
-
+        VStack {
+            ScrollView {
                 LazyVGrid(columns: gridItem) {
-                    ForEach(shoesVM.shoes) { shoe in
+                    ForEach(shoesVM.shoesFavorites) { shoe in
                         NavigationLink(value: shoe) {
                             VStack {
                                 Model3D(named: "\(shoe.model3DName)Scene",
@@ -25,7 +25,7 @@ struct FavoritesView: View {
                                     model
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                        
+                                    
                                     // .scaledToFit()
                                     // .scaleEffect(scaleMagnified)
                                     // .offset(y: -50)
@@ -48,11 +48,12 @@ struct FavoritesView: View {
                     }
                 }
             }
-        
+            .padding()
+        }
     }
 }
 
-#Preview {
+#Preview(windowStyle: .automatic) {
     FavoritesView()
         .environment(ShoesVM(interactor: DataTest()))
 }

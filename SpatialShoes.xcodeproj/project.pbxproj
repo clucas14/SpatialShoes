@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A613E9F2C71E441003E6F45 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A613E9E2C71E441003E6F45 /* MainTabView.swift */; };
+		4A613EA22C720165003E6F45 /* DragGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A613EA12C720165003E6F45 /* DragGestureHandler.swift */; };
+		4A613EA42C7201B1003E6F45 /* MagnifyGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A613EA32C7201B0003E6F45 /* MagnifyGestureHandler.swift */; };
 		4A6C22CE2C6FA7E9003637F2 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C22CD2C6FA7E9003637F2 /* FavoritesView.swift */; };
 		4A6C22D02C6FB3B4003637F2 /* ShoeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C22CF2C6FB3B4003637F2 /* ShoeModel.swift */; };
 		4A741FD72C6CF46B00845CE6 /* shoesTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A741FD62C6CF46B00845CE6 /* shoesTest.json */; };
 		4A741FD92C6CF51100845CE6 /* DataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A741FD82C6CF51100845CE6 /* DataTest.swift */; };
 		4A741FDB2C6CF85B00845CE6 /* shoesTest2.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A741FDA2C6CF85B00845CE6 /* shoesTest2.json */; };
-		4A741FDE2C6CFA3D00845CE6 /* GridButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A741FDD2C6CFA3D00845CE6 /* GridButton.swift */; };
+		4A741FDE2C6CFA3D00845CE6 /* GridButtonBORRAR?.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A741FDD2C6CFA3D00845CE6 /* GridButtonBORRAR?.swift */; };
 		4A8C62DD2C6F6051001A89DD /* shoesTest3.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A8C62DC2C6F6051001A89DD /* shoesTest3.json */; };
 		4A9279A92C6CED3B00D4ECE3 /* SpatialShoes3D in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9279A82C6CED3B00D4ECE3 /* SpatialShoes3D */; };
 		4A9279AC2C6CED9800D4ECE3 /* ShoesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9279AB2C6CED9800D4ECE3 /* ShoesVM.swift */; };
@@ -21,21 +24,24 @@
 		4A9279B32C6CEDBB00D4ECE3 /* JSONInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9279B12C6CEDBB00D4ECE3 /* JSONInteractor.swift */; };
 		4A9279B72C6CEDE900D4ECE3 /* shoes.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A9279B62C6CEDE900D4ECE3 /* shoes.json */; };
 		4ADE9BEE2C6CEA6A0073D2F8 /* SpatialShoesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE9BED2C6CEA6A0073D2F8 /* SpatialShoesApp.swift */; };
-		4ADE9BF02C6CEA6A0073D2F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE9BEF2C6CEA6A0073D2F8 /* ContentView.swift */; };
+		4ADE9BF02C6CEA6A0073D2F8 /* AllShoesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE9BEF2C6CEA6A0073D2F8 /* AllShoesView.swift */; };
 		4ADE9BF22C6CEA6C0073D2F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4ADE9BF12C6CEA6C0073D2F8 /* Assets.xcassets */; };
 		4ADE9BF52C6CEA6C0073D2F8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4ADE9BF42C6CEA6C0073D2F8 /* Preview Assets.xcassets */; };
-		4AF0F7932C709E1100040586 /* VolumetricShoe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF0F7922C709E1100040586 /* VolumetricShoe.swift */; };
+		4AF0F7932C709E1100040586 /* VolumetricShoeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF0F7922C709E1100040586 /* VolumetricShoeView.swift */; };
 		4AF4BD132C6F6DDC00635BFE /* SpatialShoes3D in Frameworks */ = {isa = PBXBuildFile; productRef = 4AF4BD122C6F6DDC00635BFE /* SpatialShoes3D */; };
 		4AF6123E2C6F46D700E39254 /* SpatialShoes3D in Frameworks */ = {isa = PBXBuildFile; productRef = 4AF6123D2C6F46D700E39254 /* SpatialShoes3D */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A613E9E2C71E441003E6F45 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		4A613EA12C720165003E6F45 /* DragGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragGestureHandler.swift; sourceTree = "<group>"; };
+		4A613EA32C7201B0003E6F45 /* MagnifyGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagnifyGestureHandler.swift; sourceTree = "<group>"; };
 		4A6C22CD2C6FA7E9003637F2 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		4A6C22CF2C6FB3B4003637F2 /* ShoeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeModel.swift; sourceTree = "<group>"; };
 		4A741FD62C6CF46B00845CE6 /* shoesTest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = shoesTest.json; sourceTree = "<group>"; };
 		4A741FD82C6CF51100845CE6 /* DataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTest.swift; sourceTree = "<group>"; };
 		4A741FDA2C6CF85B00845CE6 /* shoesTest2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = shoesTest2.json; sourceTree = "<group>"; };
-		4A741FDD2C6CFA3D00845CE6 /* GridButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridButton.swift; sourceTree = "<group>"; };
+		4A741FDD2C6CFA3D00845CE6 /* GridButtonBORRAR?.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GridButtonBORRAR?.swift"; sourceTree = "<group>"; };
 		4A8C62DC2C6F6051001A89DD /* shoesTest3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = shoesTest3.json; sourceTree = "<group>"; };
 		4A9279AB2C6CED9800D4ECE3 /* ShoesVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoesVM.swift; sourceTree = "<group>"; };
 		4A9279AE2C6CEDAB00D4ECE3 /* ShoeModelDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoeModelDTO.swift; sourceTree = "<group>"; };
@@ -44,11 +50,11 @@
 		4A9279B62C6CEDE900D4ECE3 /* shoes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = shoes.json; sourceTree = "<group>"; };
 		4ADE9BE62C6CEA6A0073D2F8 /* SpatialShoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpatialShoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ADE9BED2C6CEA6A0073D2F8 /* SpatialShoesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpatialShoesApp.swift; sourceTree = "<group>"; };
-		4ADE9BEF2C6CEA6A0073D2F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4ADE9BEF2C6CEA6A0073D2F8 /* AllShoesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllShoesView.swift; sourceTree = "<group>"; };
 		4ADE9BF12C6CEA6C0073D2F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4ADE9BF42C6CEA6C0073D2F8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4ADE9BF62C6CEA6C0073D2F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4AF0F7922C709E1100040586 /* VolumetricShoe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumetricShoe.swift; sourceTree = "<group>"; };
+		4AF0F7922C709E1100040586 /* VolumetricShoeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumetricShoeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,12 +71,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A613EA02C720157003E6F45 /* Gestures */ = {
+			isa = PBXGroup;
+			children = (
+				4A613EA12C720165003E6F45 /* DragGestureHandler.swift */,
+				4A613EA32C7201B0003E6F45 /* MagnifyGestureHandler.swift */,
+			);
+			name = Gestures;
+			sourceTree = "<group>";
+		};
 		4A6C22CC2C6FA7CE003637F2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4ADE9BEF2C6CEA6A0073D2F8 /* ContentView.swift */,
+				4A613E9E2C71E441003E6F45 /* MainTabView.swift */,
+				4ADE9BEF2C6CEA6A0073D2F8 /* AllShoesView.swift */,
 				4A6C22CD2C6FA7E9003637F2 /* FavoritesView.swift */,
-				4AF0F7922C709E1100040586 /* VolumetricShoe.swift */,
+				4AF0F7922C709E1100040586 /* VolumetricShoeView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -78,7 +94,7 @@
 		4A741FDC2C6CFA0B00845CE6 /* ViewsComponents */ = {
 			isa = PBXGroup;
 			children = (
-				4A741FDD2C6CFA3D00845CE6 /* GridButton.swift */,
+				4A741FDD2C6CFA3D00845CE6 /* GridButtonBORRAR?.swift */,
 			);
 			name = ViewsComponents;
 			sourceTree = "<group>";
@@ -140,6 +156,7 @@
 				4ADE9BED2C6CEA6A0073D2F8 /* SpatialShoesApp.swift */,
 				4A6C22CC2C6FA7CE003637F2 /* Views */,
 				4A741FDC2C6CFA0B00845CE6 /* ViewsComponents */,
+				4A613EA02C720157003E6F45 /* Gestures */,
 				4A9279AA2C6CED8500D4ECE3 /* ViewModel */,
 				4A9279AD2C6CED9F00D4ECE3 /* Model */,
 				4A9279B42C6CEDC000D4ECE3 /* Interactor */,
@@ -253,15 +270,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A9279B22C6CEDBB00D4ECE3 /* DataInteractor.swift in Sources */,
-				4A741FDE2C6CFA3D00845CE6 /* GridButton.swift in Sources */,
+				4A741FDE2C6CFA3D00845CE6 /* GridButtonBORRAR?.swift in Sources */,
 				4A6C22D02C6FB3B4003637F2 /* ShoeModel.swift in Sources */,
+				4A613EA22C720165003E6F45 /* DragGestureHandler.swift in Sources */,
 				4A9279AC2C6CED9800D4ECE3 /* ShoesVM.swift in Sources */,
 				4A9279B32C6CEDBB00D4ECE3 /* JSONInteractor.swift in Sources */,
-				4ADE9BF02C6CEA6A0073D2F8 /* ContentView.swift in Sources */,
+				4ADE9BF02C6CEA6A0073D2F8 /* AllShoesView.swift in Sources */,
 				4A741FD92C6CF51100845CE6 /* DataTest.swift in Sources */,
-				4AF0F7932C709E1100040586 /* VolumetricShoe.swift in Sources */,
+				4AF0F7932C709E1100040586 /* VolumetricShoeView.swift in Sources */,
 				4A9279AF2C6CEDAB00D4ECE3 /* ShoeModelDTO.swift in Sources */,
 				4A6C22CE2C6FA7E9003637F2 /* FavoritesView.swift in Sources */,
+				4A613E9F2C71E441003E6F45 /* MainTabView.swift in Sources */,
+				4A613EA42C7201B1003E6F45 /* MagnifyGestureHandler.swift in Sources */,
 				4ADE9BEE2C6CEA6A0073D2F8 /* SpatialShoesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

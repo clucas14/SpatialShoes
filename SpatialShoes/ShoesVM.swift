@@ -17,6 +17,10 @@ final class ShoesVM {
     
     var enlargedView = false
     
+    var shoesFavorites: [ShoeModel] {
+        shoes.filter { $0.isFavorited  }
+    }
+    
     var showAlert = false
     @ObservationIgnored var errorMsg = ""
     
