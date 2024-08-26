@@ -25,3 +25,30 @@ struct ShoeModel: Identifiable, Hashable {
     let certifications: [String]
     var isFavorited: Bool
 }
+
+extension ShoeModel {
+    var listSize: String {
+        let stringSize = size.map{"\($0)"}
+        return stringSize.formatted(.list(type: .or).locale(Locale(identifier: "ES")))
+    }
+    
+    var listMaterials: String {
+        return materials.formatted(.list(type: .and).locale(Locale(identifier: "ES")))
+    }
+
+    var listColors: String {
+        return colors.formatted(.list(type: .and).locale(Locale(identifier: "ES")))
+    }
+    
+    var listCertifications: String {
+        return certifications.formatted(.list(type: .and).locale(Locale(identifier: "ES")))
+    }
+    
+    var weightFormat: String {
+        return String(format: "%.2f", arguments: [weight])
+    }
+    
+    var priceFormat: String {
+        return price.formatted(.currency(code: "EUR"))
+    }
+}
