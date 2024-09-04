@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MagnifyGestureHandler {
+struct HandleMagnifyGesture {
     @Binding var initialScale: CGFloat
     @Binding var scaleMagnified: Double
     

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DragGestureHandler {
+struct HandleDragGesture {
     var free: Bool
     @Binding var currentRotation: CGFloat
     
