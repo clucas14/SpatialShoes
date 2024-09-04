@@ -28,6 +28,6 @@ extension ShoeModel {
         colors: ["Negro","Marrón"],
         warranty: 2,
         certifications: ["Certificación de Calidad", "Hecho a mano"],
-        isFavorited: false
+        isFavorited: true
     )
 }
