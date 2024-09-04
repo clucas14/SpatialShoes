@@ -11,7 +11,16 @@ import Foundation
 final class ShoesVM {
     let interactor: DataInteractor
     
-    var shoes: [ShoeModel]
+    var shoes: [ShoeModel] {
+        didSet {
+            do {
+                try interactor.saveShoes(json: shoes)
+            } catch {
+                errorMsg = "Ha habido un error al guardar los datos: \(error.localizedDescription)"
+                showAlert.toggle()
+            }
+        }
+    }
     
     var selectedShoe: ShoeModel?
     
@@ -27,7 +36,7 @@ final class ShoesVM {
     init(interactor: DataInteractor = Interactor()) {
         self.interactor = interactor
         do {
-            self.shoes = try interactor.getData()
+            self.shoes = try interactor.getShoes()
         } catch {
             self.shoes = []
             errorMsg = "\(error)"

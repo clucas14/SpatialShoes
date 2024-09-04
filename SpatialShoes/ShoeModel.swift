@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ShoeModel: Identifiable, Hashable {
+struct ShoeModel: Codable, Identifiable, Hashable {
     let id: Int
     let name: String
     let brand: Brand

@@ -14,4 +14,9 @@ extension JSONInteractor {
         let data = try Data(contentsOf: url)
         return try decoder.decode(type, from: data)
     }
+    
+    func saveJSON<JSON>(url: URL, json: JSON) throws where JSON: Codable {
+        let data = try JSONEncoder().encode(json)
+        try data.write(to: url, options: [.atomic])
+    }
 }

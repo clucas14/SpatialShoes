@@ -70,10 +70,7 @@ struct AllShoesView2: View {
                                     ("Warranty: ","\(selectedShoe.warranty) years"),
                                     ("Origin: ",selectedShoe.origin),
                                     ("Gender: ",selectedShoe.gender),
-                                    ("Weight: ","\(selectedShoe.weightFormat) Kg"),
-//                                    ("Size: ",selectedShoe.listSize),
-//                                    ("Colors: ",selectedShoe.listColors),
-//                                    ("Materiales: ",selectedShoe.listMaterials)
+                                    ("Weight: ","\(selectedShoe.weightFormat) Kg")
                                 ])
                                 CustomFormView(tittle: "Materials", arrayStrings: [(selectedShoe.listMaterials,"")])
                             }
@@ -81,7 +78,6 @@ struct AllShoesView2: View {
                                 CustomFormView(tittle: "Price", arrayStrings: [(selectedShoe.priceFormat,"")])
                                 CustomFormView(tittle: "Size", arrayStrings: [(selectedShoe.listSize,"")])
                                 CustomFormView(tittle: "Colors", arrayStrings: [(selectedShoe.listColors,"")])
-//                                CustomFormView(tittle: "Materials", arrayStrings: [(selectedShoe.listMaterials,"")])
                                 CustomFormView(tittle: "Certifications", arrayStrings: selectedShoe.certifications.map{($0,"")})
                             }
                         }
@@ -103,11 +99,11 @@ struct AllShoesView2: View {
                     }
                     .frame(minWidth: 450, maxWidth: 600)
                     .gesture(
-                        DragGestureHandler(free: free, currentRotation: $currentRotation, lastDragValue: $lastDragValue, velocity: $velocity)
+                        HandleDragGesture(free: free, currentRotation: $currentRotation, lastDragValue: $lastDragValue, velocity: $velocity)
                             .dragGesture()
                     )
                     .gesture(
-                        MagnifyGestureHandler(initialScale: $initialScale, scaleMagnified: $scaleMagnified)
+                        HandleMagnifyGesture(initialScale: $initialScale, scaleMagnified: $scaleMagnified)
                             .magnifyGesture()
                     )
                     .gesture(
@@ -169,7 +165,6 @@ struct AllShoesView2: View {
                                 //                                .font(.headline)
                             }
                         }
-                        .animation(.easeInOut, value: shoesVM.selectedShoe)
                     }
                     
                 }

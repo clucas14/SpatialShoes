@@ -94,11 +94,11 @@ struct AllShoesView: View {
                 }
                 .frame(width: 400, height: 450)
                 .gesture(
-                    DragGestureHandler(free: free, currentRotation: $currentRotation, lastDragValue: $lastDragValue, velocity: $velocity)
+                    HandleDragGesture(free: free, currentRotation: $currentRotation, lastDragValue: $lastDragValue, velocity: $velocity)
                         .dragGesture()
                 )
                 .gesture(
-                    MagnifyGestureHandler(initialScale: $initialScale, scaleMagnified: $scaleMagnified)
+                    HandleMagnifyGesture(initialScale: $initialScale, scaleMagnified: $scaleMagnified)
                         .magnifyGesture()
                 )
                 .gesture(

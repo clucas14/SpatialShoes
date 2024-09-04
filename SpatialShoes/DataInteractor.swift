@@ -9,14 +9,25 @@ import Foundation
 
 protocol DataInteractor: JSONInteractor {
     var url: URL { get }
-    func getData() throws -> [ShoeModel]
+    var docURL: URL { get }
 }
 
 extension DataInteractor {
     var url: URL { Bundle.main.url(forResource: "shoes", withExtension: "json")! }
+    var docURL: URL { URL.documentsDirectory.appending(path: "shoesCollection.json")}
     
-    func getData() throws -> [ShoeModel] {
-        try loadJSON(url: url, type: [ShoeModelDTO].self).map(\.toPresentation)
+    func getShoes() throws -> [ShoeModel] {
+        if !FileManager.default.fileExists(atPath: docURL.path()) {
+            let shoes = try loadJSON(url: url, type: [ShoeModelDTO].self).map(\.toPresentation)
+            try saveJSON(url: docURL, json: shoes)
+            return shoes
+        } else {
+           return try loadJSON(url: docURL, type: [ShoeModel].self)
+        }
+    }
+    
+    func saveShoes(json: [ShoeModel]) throws {
+        try saveJSON(url: docURL, json: json)
     }
 }
 
