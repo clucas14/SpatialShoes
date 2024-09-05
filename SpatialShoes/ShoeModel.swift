@@ -33,22 +33,26 @@ extension ShoeModel {
     }
     
     var listMaterials: String {
-        return materials.formatted(.list(type: .and).locale(Locale(identifier: "ES")))
+        materials.formatted(.list(type: .and).locale(Locale(identifier: "ES")))
     }
 
     var listColors: String {
-        return colors.formatted(.list(type: .and).locale(Locale(identifier: "ES")))
+        colors.formatted(.list(type: .and).locale(Locale(identifier: "ES")))
     }
     
     var listCertifications: String {
-        return certifications.formatted(.list(type: .and).locale(Locale(identifier: "ES")))
+        certifications.formatted(.list(type: .and).locale(Locale(identifier: "ES")))
     }
     
     var weightFormat: String {
-        return String(format: "%.2f", arguments: [weight])
+        String(format: "%.2f", arguments: [weight])
     }
     
     var priceFormat: String {
-        return price.formatted(.currency(code: "EUR"))
+        price.formatted(.currency(code: "EUR"))
+    }
+    
+    var brandFormat: String {
+        brand.rawValue.formattedBrand()
     }
 }

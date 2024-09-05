@@ -30,6 +30,18 @@ final class ShoesVM {
         shoes.filter { $0.isFavorited  }
     }
     
+    var search = ""
+    
+    var filteredShoes: [ShoeModel] {
+        shoes.filter{ shoe in
+            if search.isEmpty {
+                true
+            } else {
+                shoe.name.localizedStandardContains(search)
+            }
+        }
+    }
+    
     var showAlert = false
     @ObservationIgnored var errorMsg = ""
     

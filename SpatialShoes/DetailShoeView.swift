@@ -39,23 +39,23 @@ struct DetailShoeView: View {
                         HStack(alignment: .top) {
                             VStack {
                                 CustomFormView(tittle: "Datos variados", arrayStrings: [
-                                    ("Brand: ","\(selectedShoe.brand.rawValue)"),
-                                    ("Type: ","\(selectedShoe.type)".capitalized),
-                                    ("Warranty: ","\(selectedShoe.warranty) years"),
-                                    ("Origin: ",selectedShoe.origin),
-                                    ("Gender: ",selectedShoe.gender),
-                                    ("Weight: ","\(selectedShoe.weightFormat) Kg")
+                                    ("Marca: ","\(selectedShoe.brandFormat)"),
+                                    ("Tipo: ","\(selectedShoe.type)".capitalized),
+                                    ("Garantía: ","\(selectedShoe.warranty) years"),
+                                    ("Origen: ",selectedShoe.origin),
+                                    ("Género: ",selectedShoe.gender),
+                                    ("Peso: ","\(selectedShoe.weightFormat) Kg")
                                 ])
-                                CustomFormView(tittle: "Materials", arrayStrings: [(selectedShoe.listMaterials,"")])
+                                CustomFormView(tittle: "Materiales", arrayStrings: [(selectedShoe.listMaterials,"")])
                             }
                             VStack {
-                                CustomFormView(tittle: "Price", arrayStrings: [(selectedShoe.priceFormat,"")])
-                                CustomFormView(tittle: "Size", arrayStrings: [(selectedShoe.listSize,"")])
-                                CustomFormView(tittle: "Colors", arrayStrings: [(selectedShoe.listColors,"")])
-                                CustomFormView(tittle: "Certifications", arrayStrings: selectedShoe.certifications.map{($0,"")})
+                                CustomFormView(tittle: "Precio", arrayStrings: [(selectedShoe.priceFormat,"")])
+                                CustomFormView(tittle: "Tamaño", arrayStrings: [(selectedShoe.listSize,"")])
+                                CustomFormView(tittle: "Colores", arrayStrings: [(selectedShoe.listColors,"")])
+                                CustomFormView(tittle: "Certificaciones", arrayStrings: selectedShoe.certifications.map{($0,"")})
                             }
                         }
-                        CustomFormView(tittle: "Description", arrayStrings: [(selectedShoe.description,"")])
+                        CustomFormView(tittle: "Descripción", arrayStrings: [(selectedShoe.description,"")])
                     }
                     .safeAreaPadding()
                     Model3D(named: "\(selectedShoe.model3DName)Scene", bundle: spatialShoes3DBundle) { model in
@@ -142,7 +142,7 @@ struct DetailShoeView: View {
                     }
                 }
             } else {
-                Text("Select a shoe")
+                Text("Selecciona un zapato")
                     .font(.title)
             }
         }

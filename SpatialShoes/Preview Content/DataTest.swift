@@ -8,7 +8,7 @@
 import Foundation
 
 struct DataTest: DataInteractor {
-    var url: URL { Bundle.main.url(forResource: "shoesTest2", withExtension: "json")! }
+    var url: URL { Bundle.main.url(forResource: "shoesTest", withExtension: "json")! }
 }
 
 extension ShoeModel {

@@ -28,7 +28,7 @@ struct VolumetricShoeView: View {
         RealityView { content in
             guard let selectedShoe = shoesVM.selectedShoe else {
                 shoesVM.showAlert.toggle()
-                shoesVM.errorMsg = "No shoe selected, please select one"
+                shoesVM.errorMsg = "Ningún zapato seleccionado, por favor selecciona uno"
                 return
             }
             do {
@@ -42,7 +42,7 @@ struct VolumetricShoeView: View {
                 //                }
             } catch {
                 shoesVM.showAlert.toggle()
-                shoesVM.errorMsg = "Error loading entity"
+                shoesVM.errorMsg = "Error al carga la entidad"
             }
         }
         .gesture(
