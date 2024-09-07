@@ -25,6 +25,8 @@ struct VolumetricShoeView: View {
     @State private var currentRotation: CGFloat = 0.0
     
     var body: some View {
+        @Bindable var bindableShoe = shoesVM
+        
         RealityView { content in
             guard let selectedShoe = shoesVM.selectedShoe else {
                 shoesVM.showAlert.toggle()
@@ -42,14 +44,19 @@ struct VolumetricShoeView: View {
                 //                }
             } catch {
                 shoesVM.showAlert.toggle()
-                shoesVM.errorMsg = "Error al carga la entidad"
+                shoesVM.errorMsg = "Error al cargar el modelo 3D"
             }
+        } update: { content in
+                
         }
         .gesture(
             HandleDragGesture(free: free, currentRotation: $currentRotation, lastDragValue: $lastDragValue, velocity: $velocity)
                 .dragGesture()
         )
         .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: -1, z: 0))
+        .alert("Error App", isPresented: $bindableShoe.showAlert) { } message: {
+            Text(shoesVM.errorMsg)
+        }
     }
 }
 

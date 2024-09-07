@@ -19,7 +19,7 @@
 		4A6C22D02C6FB3B4003637F2 /* ShoeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6C22CF2C6FB3B4003637F2 /* ShoeModel.swift */; };
 		4A741FD72C6CF46B00845CE6 /* shoesTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 4A741FD62C6CF46B00845CE6 /* shoesTest.json */; };
 		4A741FD92C6CF51100845CE6 /* DataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A741FD82C6CF51100845CE6 /* DataTest.swift */; };
-		4A741FDE2C6CFA3D00845CE6 /* GridButtonBORRAR?.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A741FDD2C6CFA3D00845CE6 /* GridButtonBORRAR?.swift */; };
+		4A741FDE2C6CFA3D00845CE6 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A741FDD2C6CFA3D00845CE6 /* ButtonStyle.swift */; };
 		4A7F82AF2C8A128000440882 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7F82AE2C8A128000440882 /* String.swift */; };
 		4A9279A92C6CED3B00D4ECE3 /* SpatialShoes3D in Frameworks */ = {isa = PBXBuildFile; productRef = 4A9279A82C6CED3B00D4ECE3 /* SpatialShoes3D */; };
 		4A9279AC2C6CED9800D4ECE3 /* ShoesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9279AB2C6CED9800D4ECE3 /* ShoesVM.swift */; };
@@ -48,7 +48,7 @@
 		4A6C22CF2C6FB3B4003637F2 /* ShoeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeModel.swift; sourceTree = "<group>"; };
 		4A741FD62C6CF46B00845CE6 /* shoesTest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = shoesTest.json; sourceTree = "<group>"; };
 		4A741FD82C6CF51100845CE6 /* DataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTest.swift; sourceTree = "<group>"; };
-		4A741FDD2C6CFA3D00845CE6 /* GridButtonBORRAR?.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GridButtonBORRAR?.swift"; sourceTree = "<group>"; };
+		4A741FDD2C6CFA3D00845CE6 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		4A7F82AE2C8A128000440882 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		4A9279AB2C6CED9800D4ECE3 /* ShoesVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoesVM.swift; sourceTree = "<group>"; };
 		4A9279AE2C6CEDAB00D4ECE3 /* ShoeModelDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoeModelDTO.swift; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 		4A741FDC2C6CFA0B00845CE6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				4A741FDD2C6CFA3D00845CE6 /* GridButtonBORRAR?.swift */,
+				4A741FDD2C6CFA3D00845CE6 /* ButtonStyle.swift */,
 				4A11D7992C8A060300D799D7 /* ShoeCardView.swift */,
 			);
 			name = Components;
@@ -286,7 +286,7 @@
 			files = (
 				4A9279B22C6CEDBB00D4ECE3 /* DataInteractor.swift in Sources */,
 				4A11D79A2C8A060300D799D7 /* ShoeCardView.swift in Sources */,
-				4A741FDE2C6CFA3D00845CE6 /* GridButtonBORRAR?.swift in Sources */,
+				4A741FDE2C6CFA3D00845CE6 /* ButtonStyle.swift in Sources */,
 				4A65889A2C7660E700A58A7B /* CustomFormView.swift in Sources */,
 				4A6C22D02C6FB3B4003637F2 /* ShoeModel.swift in Sources */,
 				4A613EA22C720165003E6F45 /* HandleDragGesture.swift in Sources */,
@@ -451,7 +451,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				XROS_DEPLOYMENT_TARGET = 1.2;
+				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -478,7 +478,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				XROS_DEPLOYMENT_TARGET = 1.2;
+				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};

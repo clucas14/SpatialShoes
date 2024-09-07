@@ -15,7 +15,7 @@ struct AllShoesView: View {
     @State var visibility: NavigationSplitViewVisibility = .all
     
     var body: some View {
-        @Bindable var shoeBindable = shoesVM
+        @Bindable var bindableShoe = shoesVM
         
         NavigationSplitView(columnVisibility: $visibility) {
             List(selection: $selectedBrand) {
@@ -29,7 +29,7 @@ struct AllShoesView: View {
         } content: {
             Group {
                 if let selectedBrand = selectedBrand {
-                    List(selection: $shoeBindable.selectedShoe) {
+                    List(selection: $bindableShoe.selectedShoe) {
                         ForEach(shoesVM.shoesBy(brand: selectedBrand)) { shoe in
                             Text(shoe.name)
                                 .tag(shoe)
@@ -51,7 +51,7 @@ struct AllShoesView: View {
                 visibility = .detailOnly
             }
         }
-        .alert("Error App", isPresented: $shoeBindable.showAlert) { } message: {
+        .alert("Error App", isPresented: $bindableShoe.showAlert) { } message: {
             Text(shoesVM.errorMsg)
         }
     }

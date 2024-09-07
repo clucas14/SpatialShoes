@@ -15,6 +15,10 @@ struct DetailShoeView: View {
     
     @State var selectedShoe: ShoeModel?
     
+    @State private var isAnimatingFav = false
+    @State private var scaleFav: CGFloat = 1.0
+    @State private var scaleFavShadow: CGFloat = 1.0
+    
     @State private var rotationAngle: Double = 0.0
     @State private var lastDragValue: CGFloat = 0.0
     @State private var velocity: CGFloat = 0.0
@@ -90,27 +94,46 @@ struct DetailShoeView: View {
                             }
                     )
                 }
-                .navigationTitle(selectedShoe.name)
-                .navigationBarTitleDisplayMode(.inline)
+//                .navigationTitle(selectedShoe.name)
+//                .navigationBarTitleDisplayMode(.large)
                 .toolbar {
                     if backButton {
                         ToolbarItem(placement: .navigationBarLeading) {
-                            Button {
-//                                rotationAngle = 0.0
-//                                currentRotation = 0.0
-//                                rotationAngle = 0.0
-//                                scaleMagnified = 0.6
-//                                free = false
-//                                exhibitor = false
-                                visibility = .all
-                                shoesVM.selectedShoe = nil
-                            } label: {
-                                Image(systemName: "chevron.backward")
+                            HStack {
+                                Button {
+                                    visibility = .all
+                                    shoesVM.selectedShoe = nil
+                                } label: {
+                                    HStack(spacing: 2) {
+                                        Image(systemName: "chevron.backward")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 16, height: 16)
+                                            .padding(14)
+                                        
+                                        Text("Atrás")
+                                            .font(.body)
+                                            .foregroundStyle(.secondary)
+                                            .padding(.trailing, 24)
+                                    }
+                                }
+                                .buttonStyle(BackButtonStyle())
+                                .hoverEffectGroup()
+                                Text(selectedShoe.name)
+                                    .font(.title)
                             }
+                        }
+                    } else {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Text(selectedShoe.name)
+                                .font(.title)
+                                .offset(x: 72)
                         }
                     }
                     ToolbarItem(placement: .bottomOrnament) {
                         VStack {
+                            Text(selectedShoe.name)
+                                .font(.headline)
                             HStack {
                                 Toggle(isOn: $free) {
                                     Image(systemName: "hand.point.up.left")
@@ -122,8 +145,26 @@ struct DetailShoeView: View {
                                 .disabled(free)
                                 Button {
                                     shoesVM.toggleFavorited(shoe: selectedShoe)
+                                    if !selectedShoe.isFavorited {
+                                        withAnimation(.easeInOut(duration: 0.75)) {
+                                            scaleFav = 1.5
+                                            scaleFavShadow = 2.5
+                                        }
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                                            withAnimation(.easeInOut(duration: 0.75)) {
+                                                scaleFav = 1.0
+                                                scaleFavShadow = 1.0
+                                            }
+                                        }
+                                    }
                                 } label: {
-                                    Image(systemName: selectedShoe.isFavorited ? "star.fill" : "star.slash.fill")
+                                    Image(systemName: selectedShoe.isFavorited ? "star.fill" : "star")
+                                        .scaleEffect(scaleFav)
+                                        .overlay(
+                                            Image(systemName: "star.fill")
+                                                .scaleEffect(scaleFavShadow)
+                                                .opacity(selectedShoe.isFavorited ? 0.1 : 0)
+                                        )
                                 }
                                 Button {
                                     shoesVM.enlargedView = true
@@ -132,11 +173,6 @@ struct DetailShoeView: View {
                                     Image(systemName: "arrow.up.forward.app")
                                 }
                                 .disabled(shoesVM.enlargedView)
-                                //                                    }
-                                //                                }
-                                //                            .font(.title)
-                                //                            Text(selectedShoe.name)
-                                //                                .font(.headline)
                             }
                         }
                     }
@@ -159,7 +195,8 @@ struct DetailShoeView: View {
             shoeRotation()
         }
     }
-    func shoeRotation() {
+
+    private func shoeRotation() {
         let timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { _ in
             let angle = rotationAngle + 0.2
             if exhibitor {
@@ -172,9 +209,11 @@ struct DetailShoeView: View {
 
 #Preview(windowStyle: .automatic) {
     let vm = ShoesVM(interactor: DataTest())
-    DetailShoeView(visibility: .constant(.automatic))
-        .environment(vm)
-        .onAppear {
-            vm.selectedShoe = vm.shoes.first
-        }
+    NavigationStack {
+        DetailShoeView(visibility: .constant(.automatic))
+            .environment(vm)
+            .onAppear {
+                vm.selectedShoe = vm.shoes.first
+            }
+    }
 }

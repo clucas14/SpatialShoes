@@ -23,5 +23,11 @@ struct SpatialShoesApp: App {
         }
         .windowStyle(.volumetric)
         .defaultSize(width: 0.7, height: 0.7, depth: 0.7, in: .meters)
+        .defaultWindowPlacement { _, context in
+            if let mainWindow = context.windows.first {
+                return WindowPlacement(.leading(mainWindow))
+            }
+            return WindowPlacement(.none)
+        }
     }
 }

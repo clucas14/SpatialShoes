@@ -15,19 +15,24 @@ struct FavoritesView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                ScrollView {
-                    LazyVGrid(columns: gridItem) {
-                        ForEach(shoesVM.shoesFavorites) { shoe in
-                            NavigationLink(value: shoe) {
-                                ShoeCardView(shoe: shoe)
+                if !shoesVM.shoesFavorites.isEmpty {
+                    ScrollView {
+                        LazyVGrid(columns: gridItem) {
+                            ForEach(shoesVM.shoesFavorites) { shoe in
+                                NavigationLink(value: shoe) {
+                                    ShoeCardView(shoe: shoe)
+                                }
+                                .buttonBorderShape(.roundedRectangle(radius: 24))
+                            //                            .buttonStyle(GridButton())
                             }
-                            .buttonBorderShape(.roundedRectangle(radius: 25))
-                        //                            .buttonStyle(GridButton())
+                            .padding()
                         }
-                        .padding()
                     }
+                } else {
+                    ContentUnavailableView("No hay favoritos", systemImage: "star.fill", description: Text("No tienes ningún zapato seleccionado como favorito, por favor selecciona alguno."))
                 }
             }
+            .padding(.horizontal)
             .navigationTitle("Favoritos")
             .navigationDestination(for: ShoeModel.self) { shoe in
                 DetailShoeView(selectedShoe: shoe, visibility: .constant(.automatic), backButton: false)
