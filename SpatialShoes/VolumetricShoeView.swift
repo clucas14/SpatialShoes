@@ -17,6 +17,12 @@ struct VolumetricShoeView: View {
     @State private var isRotating = false
     @State private var robotCreationOrientation: Rotation3D = Rotation3D()
     
+    
+    @State private var initialScale: CGFloat = 0.5
+    @State private var scaleMagnified: Float = 0.5
+    
+    
+    
     @State private var rotationAngle: Double = 0.0
     @State private var lastDragValue: CGFloat = 0.0
     @State private var velocity: CGFloat = 0.0
@@ -37,7 +43,7 @@ struct VolumetricShoeView: View {
             }
             do {
                 let shoe = try await Entity(named: "\(selectedShoe.model3DName)Scene", in: spatialShoes3DBundle)
-                shoe.scale = [0.5, 0.5, 0.5]
+                shoe.scale = [scaleMagnified,scaleMagnified,scaleMagnified]
                 shoe.position.y = -0.2
                 shoe.components.set(InputTargetComponent())
                 /// Cambiarlo por un box?¿
@@ -48,8 +54,22 @@ struct VolumetricShoeView: View {
                 shoesVM.showAlert.toggle()
                 shoesVM.errorMsg = "Error al cargar el modelo 3D"
             }
+        } update: { content in
+            if let shoe = content.entities.first {
+                shoe.transform.scale = [scaleMagnified,scaleMagnified,scaleMagnified]
+            }
         }
-        .gesture(DragGesture()
+        .gesture(MagnifyGesture()
+            .onChanged { value in
+                let newScale = initialScale - (2.0 - value.magnification)
+                if 0.2...2.0 ~= newScale {
+                    scaleMagnified = Float(newScale)
+                }
+            }
+            .onEnded { value in
+                initialScale = CGFloat(scaleMagnified)
+            })
+        .simultaneousGesture(DragGesture()
             .targetedToAnyEntity()
             .onChanged { value in
                 handleDrag(value)
