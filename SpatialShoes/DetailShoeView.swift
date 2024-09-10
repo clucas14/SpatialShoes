@@ -12,6 +12,7 @@ import SpatialShoes3D
 struct DetailShoeView: View {
     @Environment(ShoesVM.self) private var shoesVM
     @Environment(\.openWindow) private var open
+    @Environment(\.dismiss) private var dismiss
     
     @State var selectedShoe: ShoeModel?
     
@@ -60,42 +61,42 @@ struct DetailShoeView: View {
                             }
                         }
                         CustomFormView(tittle: "Descripción", arrayStrings: [(selectedShoe.description,"")])
+                        Text(selectedShoe.description)
+//                        Text("Descubre la combinaci\u00f3n perfecta entre estilo y comodidad con nuestras **Urban Explorer** de **UrbanStride**")
                     }
                     .safeAreaPadding()
-                    Model3D(named: "\(selectedShoe.model3DName)Scene", bundle: spatialShoes3DBundle) { model in
-                        model
-                            .resizable()
-                        
-                        //                                                .scaledToFit()
-                            .scaleEffect(scaleMagnified)
-                            .aspectRatio(contentMode: .fit)
-                        //                            .position(x: 0, y: 0)
-                            .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: -1, z: 0))
-                            .rotation3DEffect(.degrees(Double(currentRotation)), axis: (x: 0, y: 1, z: 0))
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .frame(minWidth: 450, maxWidth: 600)
-                    .gesture(
-                        HandleDragGesture(free: free, currentRotation: $currentRotation, lastDragValue: $lastDragValue, velocity: $velocity)
-                            .dragGesture()
-                    )
-                    .gesture(
-                        HandleMagnifyGesture(initialScale: $initialScale, scaleMagnified: $scaleMagnified)
-                            .magnifyGesture()
-                    )
-                    .gesture(
-                        TapGesture()
-                            .onEnded { _ in
-                                if !shoesVM.enlargedView {
-                                    shoesVM.enlargedView = true
-                                    open(id: "shoeEnlarged")
+                    VStack {
+                        Model3D(named: "\(selectedShoe.model3DName)Scene", bundle: spatialShoes3DBundle) { model in
+                            model
+                                .resizable()
+                                .scaleEffect(scaleMagnified)
+                                .aspectRatio(contentMode: .fit)
+                                .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: -1, z: 0))
+                                .rotation3DEffect(.degrees(Double(currentRotation)), axis: (x: 0, y: 1, z: 0))
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        .frame(maxWidth: 550)
+                        .gesture(
+                            HandleDragGesture(free: free, currentRotation: $currentRotation, lastDragValue: $lastDragValue, velocity: $velocity)
+                                .dragGesture()
+                        )
+                        .gesture(
+                            HandleMagnifyGesture(initialScale: $initialScale, scaleMagnified: $scaleMagnified)
+                                .magnifyGesture()
+                        )
+                        .gesture(
+                            TapGesture()
+                                .onEnded { _ in
+                                    if !shoesVM.enlargedView {
+                                        shoesVM.enlargedView = true
+                                        open(id: "shoeEnlarged")
+                                    }
                                 }
-                            }
-                    )
+                        )
+                    }
+                    .frame(width: 640)
                 }
-//                .navigationTitle(selectedShoe.name)
-//                .navigationBarTitleDisplayMode(.large)
                 .toolbar {
                     if backButton {
                         ToolbarItem(placement: .navigationBarLeading) {
@@ -103,6 +104,12 @@ struct DetailShoeView: View {
                                 Button {
                                     visibility = .all
                                     shoesVM.selectedShoe = nil
+//                                    rotationAngle = 0.0
+//                                    currentRotation = 0.0
+//                                    rotationAngle = 0.0
+//                                    scaleMagnified = 0.6
+//                                    free = false
+//                                    exhibitor = false
                                 } label: {
                                     HStack(spacing: 2) {
                                         Image(systemName: "chevron.backward")
@@ -121,6 +128,7 @@ struct DetailShoeView: View {
                                 .hoverEffectGroup()
                                 Text(selectedShoe.name)
                                     .font(.title)
+                                    .padding(.leading)
                             }
                         }
                     } else {
@@ -168,6 +176,7 @@ struct DetailShoeView: View {
                                 }
                                 Button {
                                     shoesVM.enlargedView = true
+                                    shoesVM.selectedShoe = selectedShoe
                                     open(id: "shoeEnlarged")
                                 } label: {
                                     Image(systemName: "arrow.up.forward.app")
@@ -184,15 +193,13 @@ struct DetailShoeView: View {
         }
         .onChange(of: shoesVM.selectedShoe) {
             selectedShoe = shoesVM.selectedShoe
-            rotationAngle = 0.0
-            currentRotation = 0.0
-            rotationAngle = 0.0
-            scaleMagnified = 0.6
-            free = false
-            exhibitor = false
+            if shoesVM.selectedShoe == nil {
+                dismiss()
+            }
         }
         .onAppear {
             shoeRotation()
+            selectedShoe = shoesVM.selectedShoe
         }
     }
 

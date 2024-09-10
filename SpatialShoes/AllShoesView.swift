@@ -44,11 +44,18 @@ struct AllShoesView: View {
             }
             .navigationSplitViewColumnWidth(200)
         } detail: {
-            DetailShoeView(visibility: $visibility)
+            if shoesVM.selectedShoe != nil {
+                DetailShoeView(visibility: $visibility)
+            }  else {
+                Text("Selecciona un zapato")
+                    .font(.title)
+            }
         }
         .onChange(of: shoesVM.selectedShoe) {
             if shoesVM.selectedShoe != nil {
                 visibility = .detailOnly
+            } else {
+                visibility = .all
             }
         }
         .alert("Error App", isPresented: $bindableShoe.showAlert) { } message: {

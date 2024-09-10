@@ -15,14 +15,18 @@ struct SpatialShoesApp: App {
         WindowGroup {
             MainTabView()
                 .environment(shoesVM)
+                .frame(minWidth: 1080, maxWidth: 1480, minHeight: 608, maxHeight: 833)
         }
-        
+        .windowResizability(.contentSize)
+        .defaultSize(CGSize(width: 1280, height: 720))
         WindowGroup(id: "shoeEnlarged") {
             VolumetricShoeView()
                 .environment(shoesVM)
+//                .frame(minWidth: 500, maxWidth: 700, minHeight: 500, maxHeight: 700)
         }
         .windowStyle(.volumetric)
-        .defaultSize(width: 0.7, height: 0.7, depth: 0.7, in: .meters)
+        .windowResizability(.contentSize)
+        .defaultSize(width: 1.5, height: 0.5, depth: 1.5, in: .meters)
         .defaultWindowPlacement { _, context in
             if let mainWindow = context.windows.first {
                 return WindowPlacement(.leading(mainWindow))

@@ -20,7 +20,7 @@ struct SearchView: View {
                 if shoesVM.search.isEmpty {
                     ContentUnavailableView("Inicia la búsqueda", systemImage: "magnifyingglass")
                 } else if shoesVM.filteredShoes.isEmpty {
-                    ContentUnavailableView("Búsqueda vacía", systemImage: "magnifyingglass", description: Text("No hay resultados con el texto \(shoesVM.search)"))
+                    ContentUnavailableView("No hay resultados para \(shoesVM.search)", systemImage: "magnifyingglass", description: Text("Comprueba la ortografía o prueba con una nueva búsqueda."))
                 } else {
                     ScrollView {
                         LazyVGrid(columns: gridItem) {
@@ -41,6 +41,9 @@ struct SearchView: View {
             .navigationTitle("Búsqueda")
             .navigationDestination(for: ShoeModel.self) { shoe in
                 DetailShoeView(selectedShoe: shoe, visibility: .constant(.automatic), backButton: false)
+                    .onAppear {
+                        shoesVM.selectedShoe = shoe
+                    }
             }
             .searchable(text: $shoeBindable.search, placement: .navigationBarDrawer, prompt: Text("Búsqueda por nombre"))
         }

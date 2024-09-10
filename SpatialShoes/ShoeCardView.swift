@@ -19,21 +19,16 @@ struct ShoeCardView: View {
                 model
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                // .scaledToFit()
-                // .scaleEffect(scaleMagnified)
-                // .offset(y: -50)
-                // .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: -1, z: 0))
-                // .rotation3DEffect(.degrees(Double(currentRotation)), axis: (x: 0, y: 1, z: 0))
             } placeholder: {
                 ProgressView()
             }
-            .frame(width: 150, height: 150)
+            .frame(width: 150, height: 120)
             Text(shoe.name)
                 .font(.title)
             Text(shoe.brand.rawValue)
                 .font(.headline)
         }
-        .frame(width: 230, height: 250)
+        .frame(width: 230, height: 200)
         .padding()
     }
 }
