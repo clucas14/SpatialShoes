@@ -5,8 +5,7 @@
 //  Created by Carlos Lucas Sánchez on 14/8/24.
 //
 
-import Foundation
-import RealityKit
+import SwiftUI
 
 @Observable
 final class ShoesVM {
@@ -26,6 +25,10 @@ final class ShoesVM {
     var selectedShoe: ShoeModel?
     
     var enlargedView = false
+    var free = false
+    var exhibitor = false
+    
+    var visibility: NavigationSplitViewVisibility = .all
     
     var shoesFavorites: [ShoeModel] {
         shoes.filter { $0.isFavorited  }
@@ -66,5 +69,10 @@ final class ShoesVM {
             shoes[index].isFavorited.toggle()
             selectedShoe = shoes[index]
         }
+    }
+    
+    func resetTools() {
+        free = false
+        exhibitor = false
     }
 }

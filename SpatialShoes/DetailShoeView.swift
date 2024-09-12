@@ -6,37 +6,19 @@
 //
 
 import SwiftUI
-import RealityKit
-import SpatialShoes3D
 
 struct DetailShoeView: View {
     @Environment(ShoesVM.self) private var shoesVM
-    @Environment(\.openWindow) private var open
     @Environment(\.dismiss) private var dismiss
-    
-    @State private var selectedShoe: ShoeModel?
-    
-    @State private var isAnimatingFav = false
-    @State private var scaleFav: CGFloat = 1.0
-    @State private var scaleFavShadow: CGFloat = 1.0
-    
-    @State private var rotationAngle: Double = 0.0
-    @State private var lastDragValue: CGFloat = 0.0
-    @State private var velocity: CGFloat = 0.0
-    
-    @State private var free = false
-    @State private var exhibitor = false
-    
-    @State private var currentRotation: CGFloat = 0.0
-    
-    @State private var initialScale: CGFloat = 0.6
-    @State private var scaleMagnified: Double = 0.6
-    
-    @Binding var visibility: NavigationSplitViewVisibility
+    @Environment(\.dismissWindow) private var dismissWindow
     
     @State var backButton = true
     
+    @State private var selectedShoe: ShoeModel?
+    
     var body: some View {
+        @Bindable var shoeBindable = shoesVM
+        
         Group {
             if let selectedShoe {
                 HStack(spacing: 0) {
@@ -63,121 +45,9 @@ struct DetailShoeView: View {
                         CustomFormView(tittle: "Descripción", arrayStrings: [(selectedShoe.description,"")])
                     }
                     .safeAreaPadding()
-                    VStack {
-                        Model3D(named: "\(selectedShoe.model3DName)Scene", bundle: spatialShoes3DBundle) { model in
-                            model
-                                .resizable()
-                                .scaleEffect(scaleMagnified)
-                                .aspectRatio(contentMode: .fit)
-                                .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: -1, z: 0))
-                                .rotation3DEffect(.degrees(Double(currentRotation)), axis: (x: 0, y: 1, z: 0))
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        .frame(maxWidth: 550)
-                        .gesture(
-                            HandleDragGesture(free: free, currentRotation: $currentRotation, lastDragValue: $lastDragValue, velocity: $velocity)
-                                .dragGesture()
-                        )
-                        .gesture(
-                            HandleMagnifyGesture(initialScale: $initialScale, scaleMagnified: $scaleMagnified)
-                                .magnifyGesture()
-                        )
-                        .gesture(
-                            TapGesture()
-                                .onEnded { _ in
-                                    if !shoesVM.enlargedView {
-                                        shoesVM.enlargedView = true
-                                        open(id: "shoeEnlarged")
-                                    }
-                                }
-                        )
-                    }
-                    .frame(width: 640)
+                    Model3DView(shoe: selectedShoe)
                 }
-                .toolbar {
-                    if backButton {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            HStack {
-                                Button {
-                                    visibility = .all
-                                    shoesVM.selectedShoe = nil
-                                } label: {
-                                    HStack(spacing: 2) {
-                                        Image(systemName: "chevron.backward")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 16, height: 16)
-                                            .padding(14)
-                                        
-                                        Text("Atrás")
-                                            .font(.body)
-                                            .foregroundStyle(.secondary)
-                                            .padding(.trailing, 24)
-                                    }
-                                }
-                                .buttonStyle(BackButtonStyle())
-                                .hoverEffectGroup()
-                                Text(selectedShoe.name)
-                                    .font(.title)
-                                    .padding(.leading)
-                            }
-                        }
-                    } else {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Text(selectedShoe.name)
-                                .font(.title)
-                                .offset(x: 72)
-                        }
-                    }
-                    ToolbarItem(placement: .bottomOrnament) {
-                        VStack {
-                            Text(selectedShoe.name)
-                                .font(.headline)
-                            HStack {
-                                Toggle(isOn: $free) {
-                                    Image(systemName: "hand.point.up.left")
-                                }
-                                .disabled(exhibitor)
-                                Toggle(isOn: $exhibitor) {
-                                    Image(systemName: "rotate.3d")
-                                }
-                                .disabled(free)
-                                Button {
-                                    shoesVM.toggleFavorited(shoe: selectedShoe)
-                                    if !selectedShoe.isFavorited {
-                                        withAnimation(.easeInOut(duration: 0.75)) {
-                                            scaleFav = 1.5
-                                            scaleFavShadow = 2.5
-                                        }
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-                                            withAnimation(.easeInOut(duration: 0.75)) {
-                                                scaleFav = 1.0
-                                                scaleFavShadow = 1.0
-                                            }
-                                        }
-                                    }
-                                } label: {
-                                    Image(systemName: selectedShoe.isFavorited ? "star.fill" : "star")
-                                        .scaleEffect(scaleFav)
-                                        .overlay(
-                                            Image(systemName: "star.fill")
-                                                .scaleEffect(scaleFavShadow)
-                                                .opacity(selectedShoe.isFavorited ? 0.1 : 0)
-                                        )
-                                }
-                                Button {
-                                    shoesVM.enlargedView = true
-                                    shoesVM.selectedShoe = selectedShoe
-                                    open(id: "shoeEnlarged")
-                                } label: {
-                                    Image(systemName: "arrow.up.forward.app")
-                                }
-                                .disabled(shoesVM.enlargedView)
-                            }
-                        }
-                    }
-                }
+                .toolBar(shoe: selectedShoe, backButton: backButton)
             } else {
                 Text("Selecciona un zapato")
                     .font(.title)
@@ -186,30 +56,21 @@ struct DetailShoeView: View {
         .onChange(of: shoesVM.selectedShoe) {
             selectedShoe = shoesVM.selectedShoe
             if shoesVM.selectedShoe == nil {
+                dismissWindow(id: "shoeEnlarged")
                 dismiss()
             }
         }
         .onAppear {
-            shoeRotation()
+            shoesVM.resetTools()
             selectedShoe = shoesVM.selectedShoe
         }
-    }
-
-    private func shoeRotation() {
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { _ in
-            let angle = rotationAngle + 0.2
-            if exhibitor {
-                rotationAngle = rotationAngle < 360 ? angle : 0
-            }
-        }
-        RunLoop.current.add(timer, forMode: .common)
     }
 }
 
 #Preview(windowStyle: .automatic) {
     let vm = ShoesVM(interactor: DataTest())
     NavigationStack {
-        DetailShoeView(visibility: .constant(.automatic))
+        DetailShoeView()
             .environment(vm)
             .onAppear {
                 vm.selectedShoe = vm.shoes.first

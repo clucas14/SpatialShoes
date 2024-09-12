@@ -12,12 +12,10 @@ struct AllShoesView: View {
     
     @State private var selectedBrand: Brand?
     
-    @State var visibility: NavigationSplitViewVisibility = .all
-    
     var body: some View {
         @Bindable var bindableShoe = shoesVM
         
-        NavigationSplitView(columnVisibility: $visibility) {
+        NavigationSplitView(columnVisibility: $bindableShoe.visibility) {
             List(selection: $selectedBrand) {
                 ForEach(Brand.allCases, id: \.self) { brand in
                     Text(brand.rawValue.formattedBrand())
@@ -45,7 +43,7 @@ struct AllShoesView: View {
             .navigationSplitViewColumnWidth(200)
         } detail: {
             if shoesVM.selectedShoe != nil {
-                DetailShoeView(visibility: $visibility)
+                DetailShoeView()
             }  else {
                 Text("Selecciona un zapato")
                     .font(.title)
@@ -53,9 +51,9 @@ struct AllShoesView: View {
         }
         .onChange(of: shoesVM.selectedShoe) {
             if shoesVM.selectedShoe != nil {
-                visibility = .detailOnly
+                bindableShoe.visibility = .detailOnly
             } else {
-                visibility = .all
+                bindableShoe.visibility = .all
             }
         }
         .alert("Error App", isPresented: $bindableShoe.showAlert) { } message: {

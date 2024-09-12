@@ -20,7 +20,7 @@ struct CustomFormView: View {
                 VStack(alignment: .leading) {
                     ForEach(Array(arrayStrings.enumerated()), id: \.0.hashValue) { index, tupla in
                         HStack {
-                            Text(tupla.0)
+                            Text(LocalizedStringKey(tupla.0))
                             Spacer()
                             Text(tupla.1)
                         }

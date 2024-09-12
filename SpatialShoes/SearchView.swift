@@ -39,7 +39,7 @@ struct SearchView: View {
             .padding(.horizontal)
             .navigationTitle("Búsqueda")
             .navigationDestination(for: ShoeModel.self) { shoe in
-                DetailShoeView(visibility: .constant(.automatic), backButton: false)
+                DetailShoeView(backButton: false)
                     .onAppear {
                         shoesVM.selectedShoe = shoe
                     }

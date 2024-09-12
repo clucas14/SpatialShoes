@@ -31,7 +31,6 @@ struct ShoeCardView: View {
         }
         .frame(width: 230, height: 200)
         .padding()
-        
         .onAppear {
             shoeRotation()
         }
