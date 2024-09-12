@@ -22,11 +22,10 @@ struct SpatialShoesApp: App {
         WindowGroup(id: "shoeEnlarged") {
             VolumetricShoeView()
                 .environment(shoesVM)
-//                .frame(minWidth: 500, maxWidth: 700, minHeight: 500, maxHeight: 700)
         }
         .windowStyle(.volumetric)
         .windowResizability(.contentSize)
-        .defaultSize(width: 1.5, height: 0.5, depth: 1.5, in: .meters)
+        .defaultSize(width: 1.5, height: 1, depth: 1.5, in: .meters)
         .defaultWindowPlacement { _, context in
             if let mainWindow = context.windows.first {
                 return WindowPlacement(.leading(mainWindow))

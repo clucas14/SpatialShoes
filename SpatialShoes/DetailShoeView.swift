@@ -14,7 +14,7 @@ struct DetailShoeView: View {
     @Environment(\.openWindow) private var open
     @Environment(\.dismiss) private var dismiss
     
-    @State var selectedShoe: ShoeModel?
+    @State private var selectedShoe: ShoeModel?
     
     @State private var isAnimatingFav = false
     @State private var scaleFav: CGFloat = 1.0
@@ -44,12 +44,12 @@ struct DetailShoeView: View {
                         HStack(alignment: .top) {
                             VStack {
                                 CustomFormView(tittle: "Datos variados", arrayStrings: [
-                                    ("Marca: ","\(selectedShoe.brandFormat)"),
-                                    ("Tipo: ","\(selectedShoe.type)".capitalized),
-                                    ("Garantía: ","\(selectedShoe.warranty) years"),
-                                    ("Origen: ",selectedShoe.origin),
-                                    ("Género: ",selectedShoe.gender),
-                                    ("Peso: ","\(selectedShoe.weightFormat) Kg")
+                                    ("Marca:","\(selectedShoe.brandFormat)"),
+                                    ("Tipo:","\(selectedShoe.type)".capitalized),
+                                    ("Garantía:","\(selectedShoe.warranty) years"),
+                                    ("Origen:",selectedShoe.origin),
+                                    ("Género:",selectedShoe.gender),
+                                    ("Peso:","\(selectedShoe.weightFormat) Kg")
                                 ])
                                 CustomFormView(tittle: "Materiales", arrayStrings: [(selectedShoe.listMaterials,"")])
                             }
@@ -61,8 +61,6 @@ struct DetailShoeView: View {
                             }
                         }
                         CustomFormView(tittle: "Descripción", arrayStrings: [(selectedShoe.description,"")])
-                        Text(selectedShoe.description)
-//                        Text("Descubre la combinaci\u00f3n perfecta entre estilo y comodidad con nuestras **Urban Explorer** de **UrbanStride**")
                     }
                     .safeAreaPadding()
                     VStack {
@@ -104,12 +102,6 @@ struct DetailShoeView: View {
                                 Button {
                                     visibility = .all
                                     shoesVM.selectedShoe = nil
-//                                    rotationAngle = 0.0
-//                                    currentRotation = 0.0
-//                                    rotationAngle = 0.0
-//                                    scaleMagnified = 0.6
-//                                    free = false
-//                                    exhibitor = false
                                 } label: {
                                     HStack(spacing: 2) {
                                         Image(systemName: "chevron.backward")

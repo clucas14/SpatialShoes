@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealityKit
 
 @Observable
 final class ShoesVM {
@@ -60,16 +61,8 @@ final class ShoesVM {
         shoes.filter { $0.brand == brand }
     }
     
-    // Revisar si finalmente se usa
-    func selectShoe() {
-        if selectedShoe == nil {
-            selectedShoe = shoes.first
-        }
-    }
-    
     func toggleFavorited(shoe: ShoeModel) {
         if let index = shoes.firstIndex(of: shoe) {
-//        if let index = shoes.firstIndex(where: { $0.id == shoe.id }) {
             shoes[index].isFavorited.toggle()
             selectedShoe = shoes[index]
         }

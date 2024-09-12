@@ -7,16 +7,6 @@
 
 import SwiftUI
 
-//struct GridButton: ButtonStyle {
-//    func makeBody(configuration: Configuration) -> some View {
-//        configuration.label
-//            .buttonStyle(.plain)
-//            .buttonBorderShape(.roundedRectangle(radius: 25))
-//            .hoverEffect(.highlight)
-//            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
-//    }
-//}
-
 struct BackButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
                 configuration.label

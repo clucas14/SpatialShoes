@@ -11,95 +11,115 @@ import SpatialShoes3D
 
 struct VolumetricShoeView: View {
     @Environment(ShoesVM.self) private var shoesVM
+    @Environment(\.dismissWindow) private var dismissWindow
     
-    @State private var entity = Entity()
-    @State private var rotation: Rotation3D = .identity
+    @State private var shoeEntity = Entity()
+
     @State private var isRotating = false
-    @State private var robotCreationOrientation: Rotation3D = Rotation3D()
-    
+    @State private var initialOrientation: Rotation3D = .identity
+    @State private var shoeCreationOrientation: Rotation3D = Rotation3D()
     
     @State private var initialScale: CGFloat = 0.5
     @State private var scaleMagnified: Float = 0.5
     
-    
-    
-    @State private var rotationAngle: Double = 0.0
-    @State private var lastDragValue: CGFloat = 0.0
-    @State private var velocity: CGFloat = 0.0
-    
-    @State private var free = false
-    @State private var exhibitor = false
-    
-    @State private var currentRotation: CGFloat = 0.0
-    
     var body: some View {
         @Bindable var bindableShoe = shoesVM
-            
-        RealityView { content in
-            guard let selectedShoe = shoesVM.selectedShoe else {
-                shoesVM.showAlert.toggle()
-                shoesVM.errorMsg = "Ningún zapato seleccionado, por favor selecciona uno"
-                return
-            }
-            do {
-                let shoe = try await Entity(named: "\(selectedShoe.model3DName)Scene", in: spatialShoes3DBundle)
-                shoe.scale = [scaleMagnified,scaleMagnified,scaleMagnified]
-                shoe.position.y = -0.2
-                shoe.components.set(InputTargetComponent())
-                /// Cambiarlo por un box?¿
-                shoe.components.set(CollisionComponent(shapes: [.generateSphere(radius: 1)]))
-                content.add(shoe)
-                entity = shoe
-            } catch {
-                shoesVM.showAlert.toggle()
-                shoesVM.errorMsg = "Error al cargar el modelo 3D"
-            }
-        } update: { content in
-            if let shoe = content.entities.first {
-                shoe.transform.scale = [scaleMagnified,scaleMagnified,scaleMagnified]
-            }
-        }
-        .gesture(MagnifyGesture()
-            .onChanged { value in
-                let newScale = initialScale - (2.0 - value.magnification)
-                if 0.2...2.0 ~= newScale {
-                    scaleMagnified = Float(newScale)
-                }
-            }
-            .onEnded { value in
-                initialScale = CGFloat(scaleMagnified)
-            })
-        .simultaneousGesture(DragGesture()
-            .targetedToAnyEntity()
-            .onChanged { value in
-                handleDrag(value)
-            }
-            .onEnded { value in
-                isRotating = false
-            })
-
-        .onDisappear {
-            shoesVM.enlargedView = false
-        }
-                .alert("Error App", isPresented: $bindableShoe.showAlert) { } message: {
-                    Text(shoesVM.errorMsg)
-                }
         
+        if let selectedShoe = shoesVM.selectedShoe {
+            RealityView { content, attachments  in
+                do {
+                    let shoeScene = try await Entity(named: "\(selectedShoe.model3DName)Scene", in: spatialShoes3DBundle)
+                    shoeScene.scale = [scaleMagnified,scaleMagnified,scaleMagnified]
+                    shoeScene.position = [0, -0.1, 0.2]
+                    shoeScene.components.set(InputTargetComponent())
+                    shoeScene.generateCollisionShapes(recursive: true)
+                    content.add(shoeScene)
+                    shoeEntity = shoeScene
+                    if let nameShoe = attachments.entity(for: "nameShoe") {
+                        nameShoe.setPosition([0, 1, 1], relativeTo: shoeScene)
+                        nameShoe.scale = [2, 2, 2]
+                        content.add(nameShoe)
+                    }
+                } catch {
+                    shoesVM.showAlert.toggle()
+                    shoesVM.errorMsg = "Error al cargar el modelo 3D"
+                }
+            } update: { content, attachments  in
+                if let shoe = content.entities.first {
+                    shoe.transform.scale = [scaleMagnified,scaleMagnified,scaleMagnified]
+                }
+            } attachments: {
+                Attachment(id: "nameShoe") {
+                    VStack {
+                        Text(selectedShoe.name)
+                            .font(.title)
+                    }
+                    .padding()
+                    .glassBackgroundEffect()
+                }
+            }
+            .gesture(MagnifyGesture()
+                .onChanged { value in
+                    let newScale = initialScale - (1.5 - value.magnification)
+                    if 0.1...1.5 ~= newScale {
+                        scaleMagnified = Float(newScale)
+                    }
+                }
+                .onEnded { value in
+                    initialScale = CGFloat(scaleMagnified)
+                })
+            .simultaneousGesture(DragGesture()
+                .targetedToAnyEntity()
+                .onChanged { value in
+                    handleDrag(value)
+                }
+                .onEnded { value in
+                    isRotating = false
+                })
+            .toolbar {
+                ToolbarItem(placement: .bottomOrnament) {
+                    HStack {
+                        Button {
+                            dismissWindow()
+                        } label: {
+                            Image(systemName: "xmark")
+                        }
+                        Button {
+                            scaleMagnified = 0.5
+                            shoeEntity.setOrientation(.init(initialOrientation), relativeTo: nil)
+                        } label: {
+                            Image(systemName: "gobackward")
+                        }
+                    }
+                }
+            }
+            .onDisappear {
+                shoesVM.enlargedView = false
+            }
+            .alert("Error App", isPresented: $bindableShoe.showAlert) { } message: {
+                Text(shoesVM.errorMsg)
+            }
+        } else {
+            Text("Ningún zapato seleccionado, por favor selecciona uno")
+        }
     }
     
-    func handleDrag(_ value: EntityTargetValue<DragGesture.Value>) {
+    private func handleDrag(_ value: EntityTargetValue<DragGesture.Value>) {
         if !isRotating {
             isRotating = true
-            robotCreationOrientation = Rotation3D(entity.orientation(relativeTo: nil))
+            shoeCreationOrientation = Rotation3D(shoeEntity.orientation(relativeTo: nil))
         }
-        let yRotation = value.gestureValue.translation.width / 100
+        let xRotation = value.translation.height / 100 // Controla la rotación vertical
+        let yRotation = value.translation.width / 100  // Controla la rotación horizontal
+        let rotationX = Rotation3D(angle: Angle2D(radians: xRotation), axis: RotationAxis3D.x)
+        let rotationY = Rotation3D(angle: Angle2D(radians: yRotation), axis: RotationAxis3D.y)
         
-        let rotationAngle = Angle2D(radians: yRotation)
-        let rotation = Rotation3D(angle: rotationAngle, axis: RotationAxis3D.y)
+        // Combina las rotaciones en los ejes X e Y
+        let newOrientation = shoeCreationOrientation
+            .rotated(by: rotationX)
+            .rotated(by: rotationY)
         
-        let startOrientation = robotCreationOrientation
-        let newOrientation = startOrientation.rotated(by: rotation)
-        entity.setOrientation(.init(newOrientation), relativeTo: nil)
+        shoeEntity.setOrientation(.init(newOrientation), relativeTo: nil)
     }
 }
 

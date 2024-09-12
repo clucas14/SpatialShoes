@@ -21,12 +21,8 @@ struct FavoritesView: View {
                             ForEach(shoesVM.shoesFavorites) { shoe in
                                 NavigationLink(value: shoe) {
                                     ShoeCardView(shoe: shoe)
-//                                        .onTapGesture {
-//                                            shoesVM.selectedShoe = shoe
-//                                        }
                                 }
                                 .buttonBorderShape(.roundedRectangle(radius: 24))
-//                                                        .buttonStyle(GridButton())
                                 
                             }
                             .padding()
@@ -39,7 +35,7 @@ struct FavoritesView: View {
             .padding(.horizontal)
             .navigationTitle("Favoritos")
             .navigationDestination(for: ShoeModel.self) { shoe in
-                DetailShoeView(/*selectedShoe: shoe,*/ visibility: .constant(.automatic), backButton: false)
+                DetailShoeView(visibility: .constant(.automatic), backButton: false)
                     .onAppear {
                         shoesVM.selectedShoe = shoe
                     }
