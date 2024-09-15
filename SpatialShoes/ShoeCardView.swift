@@ -12,6 +12,7 @@ import SpatialShoes3D
 struct ShoeCardView: View {
     @State var shoe: ShoeModel
     
+    @State private var timer: Timer?
     @State private var rotationAngle: Double = 0.0
     
     var body: some View {
@@ -35,12 +36,16 @@ struct ShoeCardView: View {
             shoeRotation()
         }
     }
+    
+//  Inicia la rotación automática
     private func shoeRotation() {
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { _ in
-            let angle = rotationAngle + 0.2
-            rotationAngle = rotationAngle < 360 ? angle : 0
+        if timer == nil {
+            timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { _ in
+                let angle = rotationAngle + 0.2
+                rotationAngle = rotationAngle < 360 ? angle : 0
+            }
+            RunLoop.current.add(timer!, forMode: .common)
         }
-        RunLoop.current.add(timer, forMode: .common)
     }
 }
 

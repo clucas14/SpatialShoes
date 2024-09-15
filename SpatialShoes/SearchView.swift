@@ -26,8 +26,7 @@ struct SearchView: View {
                         LazyVGrid(columns: gridItem) {
                             ForEach(shoesVM.filteredShoes) { shoe in
                                 NavigationLink(value: shoe) {
-                                    ShoeCardView(shoe: shoe)
-                                    
+                                    ShoeCardView(shoe: shoe) 
                                 }
                                 .buttonBorderShape(.roundedRectangle(radius: 24))
                             }
